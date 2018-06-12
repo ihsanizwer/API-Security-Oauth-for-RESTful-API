@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="API-Security-Oauth-for-RESTful-API:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="APISecurityOauthforRESTfulAPI.war">
+      <element id="artifact" artifact-name="API-Security-Oauth-for-RESTful-API:war exploded" />
+    </root>
+  </artifact>
+</component>
