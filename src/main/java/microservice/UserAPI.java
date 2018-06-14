@@ -1,10 +1,9 @@
 package microservice;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @EnableAutoConfiguration
@@ -12,25 +11,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserAPI {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    String list(){
+    String list(@RequestHeader HttpHeaders headers, @RequestParam("name") String name)
+    {
         return "Listing of User\n";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    String add(String name){
-        return "Added User :"+name+"\n";
+    String add(@RequestHeader HttpHeaders headers, @RequestParam("name") String name){
+        return "Added User :\n";
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    String update(String name){
-        return "Updated user :"+name+"\n";
+    String update(@RequestHeader HttpHeaders headers, @RequestParam("name") String name){
+        System.out.println(headers);
+        return "Updated user :\n";
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseBody
-    String delete(String name){
+    String delete(@RequestHeader HttpHeaders headers, @RequestParam("name") String name)
+    {
         return "Deleted User :"+name+"\n";
     }
 }
