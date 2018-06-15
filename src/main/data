@@ -1,0 +1,15 @@
+import org.springframework.util.Base64Utils;
+import java.security.SecureRandom;
+
+class Test4{
+
+public static void main(String [] args){
+	String tokenID = "";
+        SecureRandom rnd = new SecureRandom();
+        byte[] token = new byte[40];
+        rnd.nextBytes(token);
+        tokenID = Base64Utils.encodeToString(token);
+        System.out.println(tokenID);
+}
+
+}

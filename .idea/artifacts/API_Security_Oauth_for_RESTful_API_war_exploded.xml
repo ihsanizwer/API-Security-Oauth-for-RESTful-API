@@ -43,6 +43,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.json:json:20180130" />
         </element>
       </element>
       <element id="directory" name="META-INF">

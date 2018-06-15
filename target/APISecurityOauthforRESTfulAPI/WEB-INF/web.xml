@@ -5,4 +5,14 @@
          version="3.1">
 
     <display-name>CSRF via STP</display-name>
+    <servlet>
+        <servlet-name>AuthorizationServer.TokenIntrospectionEndpoint</servlet-name>
+        <servlet-class>servlet.AuthorizationServer$TokenIntrospectionEndpoint</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AuthorizationServer.TokenIntrospectionEndpoint</servlet-name>
+        <url-pattern>/token_introspection_endpoint</url-pattern>
+    </servlet-mapping>
 </web-app>

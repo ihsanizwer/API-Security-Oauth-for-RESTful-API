@@ -1,2 +1,7 @@
 microservice/App.class
+servlet/AuthorizationServer$TokenEndpoint.class
+data/AccessToken.class
 microservice/UserAPI.class
+servlet/AuthorizationServer$AuthorizationEndpoint.class
+servlet/AuthorizationServer$TokenIntrospectionEndpoint.class
+servlet/AuthorizationServer.class
