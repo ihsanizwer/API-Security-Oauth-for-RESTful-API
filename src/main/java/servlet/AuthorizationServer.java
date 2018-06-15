@@ -2,6 +2,7 @@ package servlet;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import data.AccessToken;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +33,25 @@ public class AuthorizationServer {
                 resp.setContentType("application/json");
                 resp.setCharacterEncoding("utf-8");
                 PrintWriter pw = resp.getWriter();
+                JSONObject json = new JSONObject();
+                json.put("active","true");
+                Map<String, String> temp = tokenMap.get(recToken);
+                String scope = "";
+                for (Map.Entry entry: tokenMap.entrySet())
+                {
+                    scope = entry.getKey().toString();
+                }
+                json.put("scope", scope);
+                pw.print(json.toString());
 
             }else{
-                //Send error
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("utf-8");
+                PrintWriter pw = resp.getWriter();
+                JSONObject json = new JSONObject();
+                json.put("active","false");
+                json.put("scope","");
+                pw.print(json.toString());
             }
 
         }

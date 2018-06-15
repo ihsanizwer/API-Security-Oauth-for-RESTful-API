@@ -1,9 +1,16 @@
 package microservice;
 
+import com.sun.deploy.net.HttpResponse;
+import com.sun.deploy.net.MessageHeader;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedInputStream;
+import java.net.URI;
+import java.net.URL;
 
 @Controller
 @EnableAutoConfiguration
@@ -25,6 +32,7 @@ public class UserAPI {
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
     String update(@RequestHeader HttpHeaders headers, @RequestParam("name") String name){
+
         System.out.println(headers);
         return "Updated user :\n";
     }
