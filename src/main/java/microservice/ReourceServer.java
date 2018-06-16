@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 
 @Controller
@@ -30,7 +31,7 @@ public class ReourceServer {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     String add(@RequestHeader HttpHeaders headers, @RequestParam("name") String name){
-        String accessToken =processHeaders(headers);
+        String accessToken = processHeaders(headers);
         String response = "";
         final String postURL = "http://localhost:8080/APISecurityOauthforRESTfulAPI/token_introspection_endpoint";
         final String postParams = "access_token="+accessToken;
@@ -44,6 +45,20 @@ public class ReourceServer {
 
     private String processHeaders(HttpHeaders headers){
         String accessToken = "";
+        List<String> headerList =headers.getValuesAsList("Authorization");
+        if(headerList.size()<2) {
+            for (String str : headerList) {
+                String temp = str.trim();
+                accessToken = temp.substring(5);
+                System.out.println("Access token value extracted from header is :"+accessToken);
+            }
+        }else{
+            String listOfValues = "";
+            for(String string: headerList){
+                listOfValues = listOfValues+string;
+            }
+            return "Error. List of Values are :"+listOfValues;
+        }
         return accessToken;
     }
 
