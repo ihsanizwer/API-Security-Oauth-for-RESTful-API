@@ -31,9 +31,15 @@ public class ReourceServer {
     @ResponseBody
     String add(@RequestHeader HttpHeaders headers, @RequestParam("name") String name){
         String accessToken =processHeaders(headers);
+        String response = "";
         final String postURL = "http://localhost:8080/APISecurityOauthforRESTfulAPI/token_introspection_endpoint";
         final String postParams = "access_token="+accessToken;
-        return "Added User :\n";
+        try {
+           response = sendPost(postURL,postParams);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "response";
     }
 
     private String processHeaders(HttpHeaders headers){
@@ -41,7 +47,7 @@ public class ReourceServer {
         return accessToken;
     }
 
-    private void sendPost(String postURL, String postParams) throws IOException {
+    private String sendPost(String postURL, String postParams) throws IOException {
         URL obj = new URL(postURL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
@@ -63,8 +69,10 @@ public class ReourceServer {
                 response.append(inputLine);
             }
             in.close();
+            return response.toString();
         }else{
             System.out.println("Request did not work");
+            return "Request did not work "+responseCode;
         }
     }
 
