@@ -30,7 +30,7 @@ public class ReourceServer {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    String add(@RequestHeader HttpHeaders headers, @RequestParam("name") String name){
+    String add(@RequestHeader HttpHeaders headers){
         String accessToken = processHeaders(headers);
         String response = "";
         final String postURL = "http://localhost:8080/APISecurityOauthforRESTfulAPI/token_introspection_endpoint";
@@ -40,7 +40,7 @@ public class ReourceServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "response";
+        return response;
     }
 
     private String processHeaders(HttpHeaders headers){
@@ -49,7 +49,7 @@ public class ReourceServer {
         if(headerList.size()<2) {
             for (String str : headerList) {
                 String temp = str.trim();
-                accessToken = temp.substring(5);
+                accessToken = temp.substring(6).trim();
                 System.out.println("Access token value extracted from header is :"+accessToken);
             }
         }else{

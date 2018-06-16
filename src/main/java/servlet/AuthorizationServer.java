@@ -37,7 +37,7 @@ public class AuthorizationServer {
                 json.put("active","true");
                 Map<String, String> temp = tokenMap.get(recToken);
                 String scope = "";
-                for (Map.Entry entry: tokenMap.entrySet())
+                for (Map.Entry entry: temp.entrySet())
                 {
                     scope = entry.getKey().toString();
                 }
