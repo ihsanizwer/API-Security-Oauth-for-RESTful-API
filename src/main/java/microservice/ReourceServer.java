@@ -1,8 +1,10 @@
 package microservice;
 
+import org.json.JSONObject;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,17 +32,24 @@ public class ReourceServer {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    String add(@RequestHeader HttpHeaders headers){
+    HttpStatus add(@RequestHeader HttpHeaders headers){
         String accessToken = processHeaders(headers);
         String response = "";
         final String postURL = "http://localhost:8080/APISecurityOauthforRESTfulAPI/token_introspection_endpoint";
         final String postParams = "access_token="+accessToken;
         try {
            response = sendPost(postURL,postParams);
+            JSONObject json = new JSONObject(response);
+            if(json.get("active").equals("true")){
+                return HttpStatus.OK;
+            }else if(json.get("active").equals("false")){
+                return HttpStatus.BAD_REQUEST;
+            }
         } catch (IOException e) {
             e.printStackTrace();
+            return HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return response;
+        return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 
     private String processHeaders(HttpHeaders headers){
